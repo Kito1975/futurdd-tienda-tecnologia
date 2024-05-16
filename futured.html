@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUTURDD - Tienda de Tecnología Futurista</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d0d0d;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        nav a {
+            color: #00ccff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ff00ff;
+        }
+        .hero {
+            background-image: url('A_futuristic_banner_for_a_technology_store_website.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #ffffff;
+            margin-top: 50px; /* Altura de la barra de navegación */
+        }
+        .container {
+            padding: 20px;
+            background-color: #1a1a1a; /* Fondo similar a la paleta de colores del banner */
+        }
+        .container h2 {
+            color: #00ccff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .product {
+            border: 1px solid #444;
+            padding: 15px;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .product img {
+            max-width: 200px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .product img:hover {
+            transform: scale(1.1);
+        }
+        .carousel {
+            position: relative;
+            max-width: 200px;
+        }
+        .carousel img {
+            display: none;
+            width: 100%;
+        }
+        .carousel img.active {
+            display: block;
+        }
+        .product-details {
+            flex-grow: 1;
+            text-align: left;
+        }
+        .product-details h2 {
+            margin: 0;
+            color: #00ccff;
+        }
+        .product-details p {
+            margin: 5px 0;
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: #ff6347;
+        }
+        .new-price {
+            color: #ff00ff;
+            font-weight: bold;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+        .modal-content, .close {
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+        @keyframes zoom {
+            from {transform:scale(0)}
+            to {transform:scale(1)}
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #about-us-modal {
+            display: none;
+            position: fixed;
+            z-index: 2;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 20px;
+            border: 1px solid #444;
+            width: 80%;
+            max-width: 600px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translate(-50%, -60%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+        }
+        .close-about {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #f1f1f1;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        footer {
+            background-color: #1a1a1a;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#productos">Productos</a>
+        <a href="javascript:void(0);" onclick="openAboutUs()">Sobre Nosotros</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="hero"></div>
+    <div class="container" id="productos">
+        <h2>Catálogo de Productos</h2>
+        <div class="product">
+            <div class="carousel">
+                <img src="Camara_xiaomi_400.jpg" class="active" alt="Cámara Xiaomi CW400" onclick="openModal(this)">
+                <img src="2_Camara_xiaomi_400.jpg" alt="Cámara Xiaomi CW400" onclick="openModal(this)">
+                <img src="3_Camara_xiaomi_400.jpg" alt="Cámara Xiaomi CW400" onclick="openModal(this)">
+            </div>
+            <div class="product-details">
+                <h2>Cámara de Seguridad Xiaomi CW400</h2>
+                <p><span class="new-price">Precio: $79.990</span></p>
+                <p><strong>Resolución:</strong> 2.5K (2560 x 1440 píxeles)</p>
+                <p><strong>Visión nocturna:</strong> a todo color</p>
+                <p><strong>Conexión:</strong> Controlable vía App Xiaomi Mi Home</p>
+                <p><strong>Almacenamiento:</strong> Tarjeta MicroSD hasta 256GB</p>
+                <p><strong>Resistencia al agua:</strong> IP66</p>
+            </div>
+        </div>
+        <div class="product">
+            <img src="Parlantes.jpg" alt="Parlantes Bluetooth" onclick="openModal(this)">
+            <div class="product-details">
+                <h2>Parlante Bluetooth Xiaomi 16W</h2>
+                <p><span class="old-price">Antes: $49.990</span> <span class="new-price">Ahora: $39.990</span></p>
+                <p><strong>Potencia:</strong> 5W máx.</p>
+                <p><strong>Batería:</strong> 2000 mAh (Duración 13 horas aprox.)</p>
+                <p><strong>Conectividad:</strong> Bluetooth 5.0</p>
+                <p><strong>Compatibilidad:</strong> Android, iOS</p>
+                <p><strong>Puerto de carga:</strong> USB Tipo C</p>
+                <p><strong>Incluye:</strong> Cable de carga</p>
+            </div>
+        </div>
+        <div class="product">
+            <div class="carousel">
+                <img src="Audifonos.jpg" class="active" alt="Audífonos Redmi Buds 5 Pro" onclick="openModal(this)">
+                <img src="2_Audifonos.jpg" alt="Audífonos Redmi Buds 5 Pro" onclick="openModal(this)">
+                <img src="3_Audifonos.jpg" alt="Audífonos Redmi Buds 5 Pro" onclick="openModal(this)">
+            </div>
+            <div class="product-details">
+                <h2>Audífonos Inalámbricos Redmi Buds 5 Pro</h2>
+                <p><span class="old-price">Antes: $79.990</span> <span class="new-price">Ahora: $69.990</span></p>
+                <p><strong>Cancelación de ruido:</strong> hasta 52dB</p>
+                <p><strong>Batería:</strong> Auricular 54 mAh | 480 mAh – Carga Inalámbrica</p>
+                <p><strong>Conexión:</strong> Dual, Bluetooth 5.3</p>
+                <p><strong>Compatibilidad:</strong> Android, iOS</p>
+                <p><strong>Puerto de carga:</strong> USB Tipo C</p>
+                <p><strong>Incluye:</strong> Cable de carga</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="myModal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+    <div id="about-us-modal">
+        <span class="close-about" onclick="closeAboutUs()">&times;</span>
+        <h2>Sobre Nosotros</h2>
+        <p>Bienvenido a FUTURDD, tu tienda de tecnología de vanguardia. Nos especializamos en ofrecer los últimos y más innovadores productos tecnológicos del mercado. Nuestra misión es proporcionar a nuestros clientes dispositivos de alta calidad que mejoren su vida diaria y les mantengan a la vanguardia de la tecnología.</p>
+        <p>En FUTURDD, creemos en la importancia de la calidad y la satisfacción del cliente. Todos nuestros productos son seleccionados cuidadosamente para garantizar que cumplan con los más altos estándares de calidad y rendimiento. Nuestro equipo está dedicado a ofrecer un excelente servicio al cliente y a ayudarte a encontrar exactamente lo que necesitas.</p>
+        <p>Gracias por elegir FUTURDD. Estamos aquí para servirte y esperamos que disfrutes de tu experiencia de compra con nosotros.</p>
+    </div>
+    <footer id="contacto">
+        <p>Contacto: jalmarzanegocios@gmail.com | Teléfono: +56937283644</p>
+        <p>Nombre: Jorge Almarza</p>
+    </footer>
+    <script>
+        function openAboutUs() {
+            var modal = document.getElementById("about-us-modal");
+            modal.style.display = "block";
+            playSound('futuristic-sound.mp3');
+        }
+
+        function closeAboutUs() {
+            var modal = document.getElementById("about-us-modal");
+            modal.style.display = "none";
+        }
+
+        document.querySelectorAll('.carousel').forEach(carousel => {
+            let images = carousel.querySelectorAll('img');
+            let currentIndex = 0;
+
+            setInterval(() => {
+                images[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.add('active');
+            }, 3000);
+        });
+
+        function openModal(element) {
+            var modal = document.getElementById("myModal");
+            var modalImg = document.getElementById("img01");
+            modal.style.display = "block";
+            modalImg.src = element.src;
+            playSound('futuristic-sound.mp3');
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        function playSound(url) {
+            var audio = new Audio(url);
+            audio.play();
+        }
+    </script>
+</body>
+</html>
